@@ -46,8 +46,40 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.6.9</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>5.3.23</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
 
     </dependencies>
+
+    <!-- Deply to Nexus!-->
+    <distributionManagement>
+        <repository>
+            <id>
+                deploymentRepo
+            </id>
+            <name>
+                Nexus repository
+            </name>
+            <url>
+                http://192.168.108.222:8081/repository/maven-releases
+            </url>
+        </repository>
+    </distributionManagement>
+
+
 
     <build>
         <plugins>
