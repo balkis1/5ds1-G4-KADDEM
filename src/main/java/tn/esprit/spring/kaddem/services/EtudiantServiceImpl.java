@@ -16,13 +16,18 @@ import tn.esprit.spring.kaddem.repositories.EtudiantRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Slf4j
 public class EtudiantServiceImpl implements IEtudiantService{
+	@Autowired
 	EtudiantRepository etudiantRepository ;
+	@Autowired
 	ContratRepository contratRepository;
+	@Autowired
 	EquipeRepository equipeRepository;
+    @Autowired
     DepartementRepository departementRepository;
 	public List<Etudiant> retrieveAllEtudiants(){
 	return (List<Etudiant>) etudiantRepository.findAll();

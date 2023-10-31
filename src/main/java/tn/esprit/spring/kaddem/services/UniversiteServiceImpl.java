@@ -12,8 +12,10 @@ import java.util.Set;
 
 @Service
 public class UniversiteServiceImpl implements IUniversiteService{
-UniversiteRepository universiteRepository;
-DepartementRepository departementRepository;
+@Autowired
+    UniversiteRepository universiteRepository;
+@Autowired
+    DepartementRepository departementRepository;
     public UniversiteServiceImpl() {
         // TODO Auto-generated constructor stub
     }

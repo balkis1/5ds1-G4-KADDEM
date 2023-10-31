@@ -1,13 +1,9 @@
-package tn.esprit.contrat;
-
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+package tn.esprit.spring.kaddem;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.test.context.junit4.SpringRunner;
-import tn.esprit.spring.kaddem.KaddemApplication;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import tn.esprit.spring.kaddem.entities.Contrat;
 import tn.esprit.spring.kaddem.entities.Specialite;
 import tn.esprit.spring.kaddem.services.IContratService;
@@ -15,26 +11,18 @@ import tn.esprit.spring.kaddem.services.IContratService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.springframework.boot.test.context.SpringBootTest;
-
-
+@SpringBootTest
 @Slf4j
-@Service
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = KaddemApplication.class)
-
-public class KaddemApplicationTest {
+class EtudiantServiceImplTest {
     @Autowired
-    IContratService contratService;
-    @Test
-    public void testAddContat() throws ParseException {
+    private IContratService contratService;
 
+    @Test
+    public void testAddEtudiant() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date dateDebutContrat = dateFormat.parse("1/09/2000");
+        Date dateDebutContrat = dateFormat.parse("1/06/2000");
         Date dateFinContrat = dateFormat.parse("30/09/2000");
 
         Specialite specialite = Specialite.IA;  // Replace IA with the desired enum value
@@ -42,11 +30,12 @@ public class KaddemApplicationTest {
         // Replace "True" with true
         boolean archive = true;
 
-        Contrat c = new Contrat(dateDebutContrat, dateFinContrat, specialite, archive, 15);
+        Contrat c = new Contrat(dateDebutContrat, dateFinContrat, specialite, archive, 20);
 
         Contrat contrat = contratService.addContrat(c);
         log.info("contraaat "+contrat);
         assertNotNull(contrat.getIdContrat());
         assertTrue(contrat.getArchive());
 
-    } }
+    }
+}
