@@ -15,12 +15,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Slf4j
-class EtudiantServiceImplTest {
+class ContratServiceImplTest {
     @Autowired
     private IContratService contratService;
 
     @Test
-    public void testAddEtudiant() throws ParseException {
+    public void testAddContrat() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date dateDebutContrat = dateFormat.parse("1/06/2000");
         Date dateFinContrat = dateFormat.parse("30/09/2000");
