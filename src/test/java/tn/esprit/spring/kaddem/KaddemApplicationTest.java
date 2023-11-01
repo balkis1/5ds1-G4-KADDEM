@@ -1,4 +1,4 @@
-package tn.esprit.contrat;
+package tn.esprit.spring.kaddem;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.test.context.junit4.SpringRunner;
-import tn.esprit.spring.kaddem.KaddemApplication;
 import tn.esprit.spring.kaddem.entities.Contrat;
 import tn.esprit.spring.kaddem.entities.Specialite;
 import tn.esprit.spring.kaddem.services.IContratService;

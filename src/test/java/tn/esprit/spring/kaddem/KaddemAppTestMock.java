@@ -1,4 +1,4 @@
-package tn.esprit.contrat;
+package tn.esprit.spring.kaddem;
 
 import org.junit.Before;
 import org.junit.Test;

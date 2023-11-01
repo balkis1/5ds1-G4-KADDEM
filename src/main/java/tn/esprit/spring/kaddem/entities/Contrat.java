@@ -49,7 +49,6 @@ public class Contrat implements Serializable{
         this.montantContrat = montantContrat;
     }
 
-
     public Integer getIdContrat() {
         return idContrat;
     }
