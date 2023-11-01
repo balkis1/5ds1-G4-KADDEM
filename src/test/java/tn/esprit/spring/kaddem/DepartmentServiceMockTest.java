@@ -21,12 +21,9 @@ public class DepartmentServiceMockTest {
         Departement department = new Departement();
         department.setIdDepart(123); // Set the department ID to 123
         department.setNomDepart("Computer Science"); // Set the department name
-        /*Set<Etudiant> etudiants = new HashSet<>(); // Create a set of etudiants
-        etudiants.add(etudiant); // Add the previously created etudiant to the set
-        department.setEtudiants(etudiants); // Set the etudiants for the department*/
-        //Departement result = departementService.addDepartement(department);
 
-        // Define the behavior of the mocked etudiantService
+
+        // Define the behavior of the mocked departementService
         when(departementService.addDepartement(any(Departement.class))).thenReturn(department);
         // Test the service that depends on the mocked etudiantService
         Departement result = departementService.addDepartement(department);
