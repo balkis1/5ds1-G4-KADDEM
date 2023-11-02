@@ -28,6 +28,7 @@ import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.fasterxml.jackson.datatype.jsr310.*;
+import org.xmlunit.diff.Comparison;
 import tn.esprit.spring.kaddem.controllers.DetailEquipeRestController;
 import tn.esprit.spring.kaddem.entities.DetailEquipe;
 import tn.esprit.spring.kaddem.entities.DetailEquipeDTO;
@@ -110,6 +111,48 @@ public class DetailEquipeRestControllerTest {
                 .andExpect(status().isCreated())
                 .andReturn();
 
+    }
+
+    @Test
+    public void retrieveDetailEquipeTest() throws Exception {
+
+        Mockito.when(detailEquipeService.retrieveDetailEquipe(Mockito.anyInt())).thenReturn(detailEquipe);
+        mockMvc.perform(MockMvcRequestBuilders.get("/DetailEquipe/retrieve-DetailEquipe/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("utf-8")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.thematique", is("thematique1")))
+                .andReturn();
+    }
+
+    @Test
+    public void updateDetailEquipeTest() throws Exception {
+
+        DetailEquipe detailEquipeUpdated = DetailEquipe.builder().idDetailEquipe(2).salle(1).thematique("thematique1").build();
+        Mockito.when(detailEquipeService.updateDetailEquipe(detailEquipe.getIdDetailEquipe(), detailEquipeDTO)).thenReturn(detailEquipeUpdated);
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/DetailEquipe/update-DetailEquipe/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("utf-8")
+                        .content(asJsonString(detailEquipeDTO))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isAccepted())
+                .andExpect(jsonPath("$.thematique", is("thematique1")))
+                .andReturn();
+    }
+
+    @Test
+    public void deleteDetailEquipe() throws Exception {
+
+        Mockito.when(detailEquipeService.retrieveDetailEquipe(Mockito.anyInt())).thenReturn(detailEquipe);
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/DetailEquipe/remove-DetailEquipe/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("utf-8")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
     }
 
 
