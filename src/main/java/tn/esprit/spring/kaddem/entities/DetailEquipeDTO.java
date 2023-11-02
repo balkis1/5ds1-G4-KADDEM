@@ -2,7 +2,6 @@ package tn.esprit.spring.kaddem.entities;
 
 import lombok.*;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 @Getter

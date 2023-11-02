@@ -29,33 +29,33 @@ public class DetailEquipeRestController {
 
 	// http://localhost:8089/Kaddem/DetailEquipe/retrieve-DetailEquipe/8
 	@GetMapping("/retrieve-DetailEquipe/{DetailEquipe-id}")
-	public DetailEquipe retrieveDetailEquipe(@PathVariable("DetailEquipe-id") Integer DetailEquipeId) {
-		return iDetailEquipeService.retrieveDetailEquipe(DetailEquipeId);
+	public DetailEquipe retrieveDetailEquipe(@PathVariable("DetailEquipe-id") Integer detailEquipeId) {
+		return iDetailEquipeService.retrieveDetailEquipe(detailEquipeId);
 	}
 
 
 
 	// http://localhost:8089/Kaddem/DetailEquipe/add-DetailEquipe
 	@PostMapping("/add-DetailEquipe")
-	public ResponseEntity<DetailEquipe> addDetailEquipe(@RequestBody DetailEquipeDTO DeDTO) {
-		return new ResponseEntity<>(iDetailEquipeService.addDetailEquipe(DeDTO) , HttpStatus.CREATED);
+	public ResponseEntity<DetailEquipe> addDetailEquipe(@RequestBody DetailEquipeDTO detailEquipeDTO) {
+		return new ResponseEntity<>(iDetailEquipeService.addDetailEquipe(detailEquipeDTO) , HttpStatus.CREATED);
 	}
 
 
 
 	// http://localhost:8089/Kaddem/contrat/remove-contrat/1
 	@DeleteMapping("/remove-DetailEquipe/{DetailEquipe-id}")
-	public void removeDetailEquipe(@PathVariable("DetailEquipe-id") Integer DetailEquipeId) {
-		iDetailEquipeService.removeDetailEquipe(DetailEquipeId);
+	public void removeDetailEquipe(@PathVariable("DetailEquipe-id") Integer detailEquipeId) {
+		iDetailEquipeService.removeDetailEquipe(detailEquipeId);
 	}
 
 
 
 	// http://localhost:8089/Kaddem/DetailEquipe/update-DetailEquipe
 	@PutMapping("/update-DetailEquipe/{DetailEquipe-id}")
-	public  ResponseEntity<DetailEquipe> updateContrat(@PathVariable("DetailEquipe-id") Integer DetailEquipeId,
-									  @RequestBody DetailEquipeDTO DeDTO) {
-		return new ResponseEntity<>(iDetailEquipeService.updateDetailEquipe(DetailEquipeId,DeDTO) , HttpStatus.ACCEPTED);
+	public  ResponseEntity<DetailEquipe> updateContrat(@PathVariable("DetailEquipe-id") Integer detailEquipeId,
+									  @RequestBody DetailEquipeDTO detailEquipeDTO) {
+		return new ResponseEntity<>(iDetailEquipeService.updateDetailEquipe(detailEquipeId,detailEquipeDTO) , HttpStatus.ACCEPTED);
 	}
 }
 

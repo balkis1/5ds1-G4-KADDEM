@@ -23,16 +23,16 @@ public class DetailEquipeServiceImpl implements IDetailEquipeService {
 	}
 
 	@Override
-	public DetailEquipe updateDetailEquipe(Integer DetailEquipeId, DetailEquipeDTO deDTO) {
-		DetailEquipe de1 = detailEquipeRepository.findDetailEquipeByIdDetailEquipe(DetailEquipeId);
+	public DetailEquipe updateDetailEquipe(Integer detailEquipeId, DetailEquipeDTO deDTO) {
+		DetailEquipe de1 = detailEquipeRepository.findDetailEquipeByIdDetailEquipe(detailEquipeId);
 		de1.setThematique(deDTO.getThematique());
 		de1.setSalle(deDTO.getSalle());
 		return detailEquipeRepository.save(de1);
 	}
 
 	@Override
-	public DetailEquipe addDetailEquipe(DetailEquipeDTO DeDTO) {
-		return detailEquipeRepository.save(new DetailEquipe(DeDTO.getSalle(), DeDTO.getThematique()));
+	public DetailEquipe addDetailEquipe(DetailEquipeDTO detailEquipeDTO) {
+		return detailEquipeRepository.save(new DetailEquipe(detailEquipeDTO.getSalle(), detailEquipeDTO.getThematique()));
 	}
 
 	@Override
