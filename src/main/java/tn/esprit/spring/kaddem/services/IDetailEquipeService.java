@@ -1,6 +1,8 @@
 package tn.esprit.spring.kaddem.services;
 
 import tn.esprit.spring.kaddem.entities.DetailEquipe;
+import tn.esprit.spring.kaddem.entities.DetailEquipeDTO;
+
 import java.util.Date;
 import java.util.List;
 
@@ -8,9 +10,9 @@ public interface IDetailEquipeService {
 
      List<DetailEquipe> retrieveAllDetailEquipes();
 
-     DetailEquipe updateDetailEquipe (DetailEquipe  de);
+     DetailEquipe updateDetailEquipe (Integer DetailEquipeId,DetailEquipeDTO  deDTO);
 
-      DetailEquipe addDetailEquipe (DetailEquipe de);
+      DetailEquipe addDetailEquipe (DetailEquipeDTO de);
 
      DetailEquipe retrieveDetailEquipe (Integer  idDetailEquipe);
 
