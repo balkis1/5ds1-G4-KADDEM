@@ -6,6 +6,6 @@ import tn.esprit.spring.kaddem.entities.Universite;
 
 @Repository
 public interface UniversiteRepository extends CrudRepository<Universite,Integer> {
-
+    Universite findUnivById(Integer id);
 
 }
