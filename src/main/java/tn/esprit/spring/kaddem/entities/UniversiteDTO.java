@@ -1,7 +1,6 @@
 package tn.esprit.spring.kaddem.entities;
 import lombok.*;
 
-import java.io.Serializable;
 
 @Getter
 @Setter

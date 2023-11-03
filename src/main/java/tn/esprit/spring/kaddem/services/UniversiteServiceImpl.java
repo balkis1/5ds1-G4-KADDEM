@@ -1,24 +1,26 @@
 package tn.esprit.spring.kaddem.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import tn.esprit.spring.kaddem.entities.Universite;
 import tn.esprit.spring.kaddem.entities.UniversiteDTO;
 import tn.esprit.spring.kaddem.repositories.UniversiteRepository;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
+import java.util.List;
+
+@Slf4j
 @Service
 public class UniversiteServiceImpl implements IUniversiteService{
-@Autowired
+    final
     UniversiteRepository universiteRepository;
 
-    public UniversiteServiceImpl() {
-        // TODO Auto-generated constructor stub
+    public UniversiteServiceImpl(UniversiteRepository universiteRepository) {
+        this.universiteRepository = universiteRepository;
     }
-  public   List<Universite> retrieveAllUniversites(){
+
+
+    public   List<Universite> retrieveAllUniversites(){
 return (List<Universite>) universiteRepository.findAll();
     }
 
@@ -36,8 +38,7 @@ return (List<Universite>) universiteRepository.findAll();
     }
 
   public Universite retrieveUniversite (Integer idUniversite){
-Universite u = universiteRepository.findById(idUniversite).get();
-return  u;
+       return universiteRepository.findById(idUniversite).orElse(null);
     }
     public  void deleteUniversite(Integer idUniversite){
         universiteRepository.delete(retrieveUniversite(idUniversite));

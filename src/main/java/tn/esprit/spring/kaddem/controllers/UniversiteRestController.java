@@ -1,7 +1,6 @@
 package tn.esprit.spring.kaddem.controllers;
 
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,19 +9,22 @@ import tn.esprit.spring.kaddem.entities.UniversiteDTO;
 import tn.esprit.spring.kaddem.services.IUniversiteService;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/universite")
 public class UniversiteRestController {
-	@Autowired
+	final
 	IUniversiteService universiteService;
+
+	public UniversiteRestController(IUniversiteService universiteService) {
+		this.universiteService = universiteService;
+	}
+
 	// http://localhost:8089/Kaddem/universite/retrieve-all-universites
 	@GetMapping("/retrieve-all-universites")
 	public List<Universite> getUniversites() {
-		List<Universite> listUniversites = universiteService.retrieveAllUniversites();
-		return listUniversites;
+		return universiteService.retrieveAllUniversites();
+
 	}
 	// http://localhost:8089/Kaddem/universite/retrieve-universite/8
 	@GetMapping("/retrieve-universite/{universite-id}")

@@ -4,7 +4,6 @@ import tn.esprit.spring.kaddem.entities.Universite;
 import tn.esprit.spring.kaddem.entities.UniversiteDTO;
 
 import java.util.List;
-import java.util.Set;
 
 public interface IUniversiteService {
    public List<Universite> retrieveAllUniversites();
