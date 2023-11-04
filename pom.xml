@@ -15,7 +15,9 @@
     <description>kaddem</description>
     <properties>
         <java.version>1.8</java.version>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     </properties>
+         
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
