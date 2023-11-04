@@ -6,7 +6,6 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: balkis00
-      MYSQL_DATABASE: kaddem
 
     volumes:
       - /home/mysql/data:/var/lib/mysql
