@@ -1,17 +1,19 @@
 version: "3.3"
 services:
   mysqldb:
-    container_name: unique_mysql_container
+    container_name: mysqldb
     image: mysql:8
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: balkis00
+      MYSQL_DATABASE: kaddem
+
     volumes:
       - /home/mysql/data:/var/lib/mysql
 
   spring_app:
     image: balkismelki/kaddem2
-    container_name: devopscontainer
+    container_name: kaddemproject
     restart: on-failure
     ports:
       - "9091:9091"
