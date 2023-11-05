@@ -1,15 +1,15 @@
+version: '1'
 services:
   backend:
-    depends_on: [mysqldb]
-    build: .
+    image: asmahejaiej/jenkins-releases:v1.0.0
+
     ports:
       - "8089:8089"
+    links:
+      - mysqldb
   mysqldb:
     image: mysql:8.0
-    container_name: mysql-db
     environment:
       MYSQL_DATABASE: kaddem
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
-    ports:
-      - "3306:3306"
