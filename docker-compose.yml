@@ -5,9 +5,12 @@ services:
     image: mysql:8
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      - MYSQL_ROOT_PASSWORD =
+      - MYSQL_DATABASE = kaddem
     volumes:
       -  /home/mysql/data:/var/lib/mysql
+    ports:
+      - 3036:3036
 
   spring_app:
     image: hanine04/devopsimage
