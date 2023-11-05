@@ -11,7 +11,7 @@ services:
 
   spring_app:
     image: hanine04/devopsimage
-    container_name: devopscontainer
+    container_name: wonderful_pasteur
     restart: on-failure
     ports:
       - 8089:8089
