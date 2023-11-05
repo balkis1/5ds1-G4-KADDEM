@@ -1,4 +1,3 @@
-version: '1'
 services:
   backend:
     image: asmahejaiej/jenkins-releases:v1.0.0
