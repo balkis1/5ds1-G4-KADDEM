@@ -32,7 +32,7 @@ return (List<Universite>) universiteRepository.findAll();
 
     @Override
     public Universite updateUniversite(Integer id, UniversiteDTO deDTO) {
-        Universite de1 = universiteRepository.findUnivById(id);
+        Universite de1 = universiteRepository.findUniversiteByIdUniv(id);
         de1.setNomUniv(deDTO.getNomUniv());
         return universiteRepository.save(de1);
     }

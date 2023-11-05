@@ -80,7 +80,7 @@ public class UniversiteServiceTest {
     @Test
     public void updateUniversiteServiceTest() {
         Universite UniversiteUpdated = Universite.builder().idUniv(2).nomUniv("ESPRIT").build();
-        Mockito.when(UniversiteRepository.findUnivById(1)).thenReturn(universite);
+        Mockito.when(UniversiteRepository.findUniversiteByIdUniv(1)).thenReturn(universite);
         Mockito.when(UniversiteRepository.save(universite)).thenReturn(UniversiteUpdated);
         Universite Universite1 = UniversiteServiceImpl.updateUniversite(1, universiteDTO);
         Assert.assertNotNull(Universite1);
