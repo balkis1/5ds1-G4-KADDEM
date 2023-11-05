@@ -1,39 +1,15 @@
-version: "3.3"
-
 services:
+  backend:
+    depends_on: [mysqldb]
+    build: .
+    ports:
+      - "8089:8089"
   mysqldb:
-    container_name: mysqldb
-    image: mysql:8
-    restart: unless-stopped
+    image: mysql:8.0
+    container_name: mysql-db
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=kaddem
-    networks:
-      - springapimysql-net
+      MYSQL_DATABASE: kaddem
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
     ports:
-      - 3306:3306
-    volumes:
-      - db:/var/lib/mysql
-  app:
-    container_name: app
-    depends_on:
-      - mysqldb
-    build:
-      context: .
-      dockerfile: Dockerfile
-    restart: on-failure
-    networks:
-      - springapimysql-net
-    ports:
-      - 8089:8089
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-
-volumes:
-  db:
-
-networks:
-  springapimysql-net:
-    driver: bridge
+      - "3306:3306"
