@@ -53,7 +53,7 @@ public class DetailEquipeRestController {
 
 	// http://localhost:8089/Kaddem/DetailEquipe/update-DetailEquipe
 	@PutMapping("/update-DetailEquipe/{DetailEquipe-id}")
-	public  ResponseEntity<DetailEquipe> updateContrat(@PathVariable("DetailEquipe-id") Integer detailEquipeId,
+	public  ResponseEntity<DetailEquipe> updateDetailEquipe(@PathVariable("DetailEquipe-id") Integer detailEquipeId,
 									  @RequestBody DetailEquipeDTO detailEquipeDTO) {
 		return new ResponseEntity<>(iDetailEquipeService.updateDetailEquipe(detailEquipeId,detailEquipeDTO) , HttpStatus.ACCEPTED);
 	}
