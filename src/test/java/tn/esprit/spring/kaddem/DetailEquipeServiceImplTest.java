@@ -15,10 +15,10 @@ import tn.esprit.spring.kaddem.entities.DetailEquipeDTO;
 import tn.esprit.spring.kaddem.repositories.DetailEquipeRepository;
 import tn.esprit.spring.kaddem.services.IDetailEquipeService;
 import java.util.List;
-
+    
 import static org.junit.jupiter.api.Assertions.*;
 
-
+   
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Slf4j
@@ -32,7 +32,7 @@ public class DetailEquipeServiceImplTest {
     DetailEquipeRepository detailEquipeRepository;
 
     static Integer IdDetailEquipe = 0;
-
+   
 
     @Test
     @Order(2)
