@@ -49,9 +49,16 @@
 
     </dependencies>
 
-    <distributionManagement>
-        <url>http://172.10.0.140:8081/repository/maven-releases/</url>
+
+<distributionManagement>
+        <repository>
+            <id>my-repository</id>
+            <name>My Repository</name>
+            <url>http://172.10.0.140:8081/repository/maven-releases</url>
+        </repository>
     </distributionManagement>
+
+
 
     <build>
         <plugins>
