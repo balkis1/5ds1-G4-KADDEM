@@ -31,7 +31,6 @@ public class DepartmentServiceMockTest {
     }
     @Test
     public void testRetrieveAllDepartments() {
-
         when(departementService.retrieveAllDepartements()).thenReturn(Arrays.asList(new Departement(), new Departement()));
         List<Departement> result = departementService.retrieveAllDepartements();
         // Verify that the mocked service was called
@@ -45,16 +44,12 @@ public class DepartmentServiceMockTest {
         department.setIdDepart(123); // Set the department ID to 123
         department.setNomDepart("Computer Science");
         when(departementService.updateDepartement(any(Departement.class))).thenReturn(department);
-
-
         Departement result = departementService.updateDepartement(department);
-        // Verify that the mocked service was called with the correct arguments
         verify(departementService, times(1)).updateDepartement(any(Departement.class));
         assertEquals("Computer Science" , result.getNomDepart());}
 
     @Test
     public void testRemoveDepartment() {
-
         doNothing().when(departementService).deleteDepartement(123);
         departementService.deleteDepartement(123);
         verify(departementService, times(1)).deleteDepartement(123);
