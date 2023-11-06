@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.eq;
+
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -104,6 +107,7 @@ public class KaddemAppTestMock {
 
         // Define the behavior of the mocked contratRepository for retrieveContrat
         when(contratService.retrieveContrat(eq(1))).thenReturn(contrat);
+
 
         // Test the service that depends on the mocked contratRepository
         contratService.removeContrat(1);

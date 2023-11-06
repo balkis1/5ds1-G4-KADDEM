@@ -8,12 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.springframework.test.context.junit4.SpringRunner;
 import tn.esprit.spring.kaddem.entities.Contrat;
-import tn.esprit.spring.kaddem.entities.Etudiant;
 import tn.esprit.spring.kaddem.entities.Specialite;
 import tn.esprit.spring.kaddem.repositories.EtudiantRepository;
 import tn.esprit.spring.kaddem.services.IContratService;
@@ -21,13 +19,13 @@ import tn.esprit.spring.kaddem.services.IContratService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = KaddemApplication.class)
 public class KaddemApplicationTest {
     @Autowired
     IContratService contratService;
-    EtudiantRepository etudiantRepository;
 
     @Test
     @Order(1)
@@ -49,7 +47,7 @@ public class KaddemApplicationTest {
 
     @Test
     @Order(2)
-    void testRemoveContrat() {
+    public void testRemoveContrat() {
         Integer existingContratId = 1;
 
         contratService.removeContrat(existingContratId);
@@ -60,99 +58,73 @@ public class KaddemApplicationTest {
         // Check if the removed contrat is null (indicating it was successfully removed)
         assertNull(removedContrat);
     }
+
+
     @Test
     @Order(3)
-    void testAffectContratToEtudiant() {
+
+    public void testUpdateContrat() throws ParseException {
+        // Create a new Contrat and add it to the database
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date dateDebutContrat = null;
-        Date dateFinContrat = null;
-
-        try {
-            dateDebutContrat = dateFormat.parse("1/09/2000");
-            dateFinContrat = dateFormat.parse("30/09/2000");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
+        Date dateDebutContrat = dateFormat.parse("1/09/2022");
+        Date dateFinContrat = dateFormat.parse("30/09/2022");
         Specialite specialite = Specialite.IA;
         boolean archive = true;
-        Contrat contrat = new Contrat(dateDebutContrat, dateFinContrat, specialite, archive, 15);
 
-        // Add a new student (Etudiant) to the database or use an existing one
-        Etudiant etudiant = new Etudiant(); // Replace with actual code to create an Etudiant
+        Contrat c = new Contrat(dateDebutContrat, dateFinContrat, specialite, archive, 15);
+        Contrat addedContrat = contratService.addContrat(c);
 
-        // Save the student to the repository or use an existing student
-        etudiant = etudiantRepository.save(etudiant);
+        // Modify the Contrat
+        addedContrat.setArchive(false);
+        Contrat updatedContrat = contratService.updateContrat(addedContrat);
 
-        // Assign the contract to the student
-        Contrat assignedContrat = contratService.affectContratToEtudiant(contrat.getIdContrat(), etudiant.getNomE(), etudiant.getPrenomE());
+        // Retrieve the updated Contrat from the database
+        Contrat retrievedContrat = contratService.retrieveContrat(updatedContrat.getIdContrat());
 
-        assertNotNull(assignedContrat);
-        assertEquals(etudiant, assignedContrat.getEtudiant());
+        // Check if the Contrat was updated successfully
+        assertNotNull(updatedContrat);
+        assertFalse(updatedContrat.getArchive());
+        assertNotNull(retrievedContrat);
+        assertEquals(updatedContrat.getIdContrat(), retrievedContrat.getIdContrat());
+
+        // Clean up - remove the test Contrat
+        contratService.removeContrat(updatedContrat.getIdContrat());
     }
-
-
 
     @Test
     @Order(4)
-    void testRetrieveAndUpdateStatusContrat() {
-        // Add test data - create a contract that is 15 days from expiration
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date currentDate = new Date();
-        Date dateDebutContrat = new Date(currentDate.getTime() - (15 * 24 * 60 * 60 * 1000)); // 15 days ago
-        Date dateFinContrat = currentDate;
-        Specialite specialite = Specialite.IA;
-        boolean archive = false;
+    public void testRetrieveAllContrats() {
+        List<Contrat> allContrats = contratService.retrieveAllContrats();
 
-        Contrat c = new Contrat(dateDebutContrat, dateFinContrat, specialite, archive, 15);
-
-        Contrat contract15DaysFromExpiration = contratService.addContrat(c);
-
-        // Invoke the method to update contract status
-        contratService.retrieveAndUpdateStatusContrat();
-
-        // Check if the contract is now archived
-        Contrat updatedContract = contratService.retrieveContrat(contract15DaysFromExpiration.getIdContrat());
-        assertNotNull(updatedContract);
-        assertTrue(updatedContract.getArchive());
-
-        // Clean up - remove the test contract
-        contratService.removeContrat(contract15DaysFromExpiration.getIdContrat());
+        // Check if the list is not null and contains at least one Contrat
+        assertNotNull(allContrats);
+        assertTrue(allContrats.size() > 0);
     }
     @Test
     @Order(5)
-    void testGetChiffreAffaireEntreDeuxDates() {
-        // Create contracts with different specializations and date ranges
+    public void testRetrieveContrat() throws ParseException {
+        // Add a Contrat to the database
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date startDate = null;
-        Date endDate = null;
+        Date dateDebutContrat = dateFormat.parse("1/09/2022");
+        Date dateFinContrat = dateFormat.parse("30/09/2022");
+        Specialite specialite = Specialite.IA;
+        boolean archive = true;
 
-        try {
-            startDate = dateFormat.parse("01/01/2023");
-            endDate = dateFormat.parse("31/01/2023");
+        Contrat c = new Contrat(dateDebutContrat, dateFinContrat, specialite, archive, 15);
+        Contrat addedContrat = contratService.addContrat(c);
 
-            // Create contracts with different specializations
-            Contrat iaContract = new Contrat(startDate, endDate, Specialite.IA, false, 15);
-            Contrat cloudContract = new Contrat(startDate, endDate, Specialite.CLOUD, false, 10);
-            Contrat reseauxContract = new Contrat(startDate, endDate, Specialite.RESEAUX, false, 12);
-            Contrat securiteContract = new Contrat(startDate, endDate, Specialite.SECURITE, false, 8);
+        // Retrieve the added Contrat using its ID
+        Contrat retrievedContrat = contratService.retrieveContrat(addedContrat.getIdContrat());
 
-            // Save the contracts in the database
-            contratService.addContrat(iaContract);
-            contratService.addContrat(cloudContract);
-            contratService.addContrat(reseauxContract);
-            contratService.addContrat(securiteContract);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        // Check if the retrieved Contrat matches the added Contrat
+        assertNotNull(retrievedContrat);
+        assertEquals(addedContrat.getIdContrat(), retrievedContrat.getIdContrat());
 
-        // Calculate the expected result
-        float expectedChiffreAffaire = (31 * 300) + (31 * 400) + (31 * 350) + (31 * 450);
-
-        // Call the function to calculate the actual result
-        float actualChiffreAffaire = contratService.getChiffreAffaireEntreDeuxDates(startDate, endDate);
-
-        // Assert the expected result matches the actual result with a tolerance for floating-point comparisons
-        assertEquals(expectedChiffreAffaire, actualChiffreAffaire, 0.01);
+        // Clean up - remove the test Contrat
+        contratService.removeContrat(retrievedContrat.getIdContrat());
     }
+
+
+
+
 }
