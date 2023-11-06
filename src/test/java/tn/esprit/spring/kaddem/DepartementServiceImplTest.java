@@ -34,27 +34,21 @@ class DepartementServiceImplTest {
     void testUpdateDepartment() {
         // Create a department to update
         Integer existingDepartementId=123;
-
         Departement existingDepartement =departementService.retrieveDepartement(existingDepartementId);
-
-
         // Update the department name
         existingDepartement.setNomDepart("New Computer Science");
         Departement updatedDepartment = departementService.updateDepartement(existingDepartement);
          Departement retriveUpdatedDepartement = departementService.retrieveDepartement(existingDepartementId);
-
          assertEquals("UpdatedName", retriveUpdatedDepartement.getNomDepart());
     }
 
     @Test
     @Order(3)
     void testRetrieveDepartment() {
-        // Create a department
-        Integer existingDepartementId = 123;
 
+        Integer existingDepartementId = 123;
         // Retrieve the department by ID
         Departement retrievedDepartment = departementService.retrieveDepartement(existingDepartementId);
-
         assertEquals("Computer Science", retrievedDepartment.getNomDepart());
     }
 
